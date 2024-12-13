@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="styles/main.css?v=1.0">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 10px 20px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #343a40;
+    }
+    #filterSearch {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    #filterSearch input, #filterSearch select {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .product-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      padding: 15px;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .card img {
+      max-width: 100%;
+      height: auto;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h3 {
+      font-size: 20px;
+      margin: 10px 0;
+      color: #343a40;
+    }
+    .card-content p {
+      font-size: 18px;
+      color: #6c757d;
+    }
+    .card-footer {
+      padding: 15px;
+      border-top: 1px solid #ddd;
+      background-color: #f8f9fa;
+    }
+    .card-footer button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.2s;
+    }
+    .card-footer button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+ 
+  <main>
+    <h1>Products</h1>
+    <div id="filterSearch">
+      <input type="text" id="searchBar" placeholder="Search products...">
+      <select id="categoryFilter">
+        <option value="">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="jewelery">Jewelry</option>
+        <option value="men's clothing">Men's Clothing</option>
+        <option value="women's clothing">Women's Clothing</option>
+      </select>
+    </div>
+
+    <!-- Products -->
+    <div class="product-container" id="productContainer">
+      <!-- Product cards will be injected here by JavaScript -->
+    </div>
+  </main>
+  <script src="app.js"></script>
+</body>
+
+
+  <script>
+    const products = JSON.parse(localStorage.getItem('products'));
+
+    const productContainer = document.getElementById('productContainer');
+
+    function renderProducts(products) {
+      productContainer.innerHTML = '';
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.title}">
+          <div class="card-content">
+            <h3>${product.title}</h3>
+            <p>$${product.price}</p>
+          </div>
+          <div class="card-footer">
+            <button>Add to Cart</button>
+          </div>
+        `;
+        productContainer.appendChild(card);
+      });
+    }
+
+    renderProducts(products);
+
+    const searchBar = document.getElementById('searchBar');
+    const categoryFilter = document.getElementById('categoryFilter');
+
+    searchBar.addEventListener('input', () => {
+      const filteredProducts = products.filter(product => {
+        const searchTerm = searchBar.value.toLowerCase();
+        return product.title.toLowerCase().includes(searchTerm);
+      });
+      renderProducts(filteredProducts);
+    });
+
+    categoryFilter.addEventListener('change', () => {
+      const filteredProducts = products.filter(product => {
+        return product.category === categoryFilter.value || categoryFilter.value === '';
+      });
+      renderProducts(filteredProducts);
+    });
+  </script>
+</body>
+</html>

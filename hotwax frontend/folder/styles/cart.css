@@ -1,0 +1,105 @@
+/* General Styles for Cart */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  header {
+    background-color: #0044cc;
+    padding: 10px 20px;
+  }
+  
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  
+  header nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Cart Page Container */
+  .cart-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #0044cc;
+    margin-bottom: 20px;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .cart-item .details {
+    flex-grow: 1;
+    padding: 0 15px;
+  }
+  
+  .cart-item h3 {
+    font-size: 16px;
+    margin: 0 0 5px;
+  }
+  
+  .cart-item p {
+    margin: 0;
+    color: #555;
+  }
+  
+  .cart-item .price {
+    font-weight: bold;
+    color: #0044cc;
+  }
+  
+  .cart-item .remove-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cart-item .remove-btn:hover {
+    background-color: #cc0000;
+  }
+  
+  /* Total Price Section */
+  .total-container {
+    text-align: right;
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  
